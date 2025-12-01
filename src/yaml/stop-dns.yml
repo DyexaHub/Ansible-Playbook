@@ -1,0 +1,9 @@
+---
+- name: Stop DNS service on DNS hosts
+  hosts: dns
+  become: true
+  tasks:
+    - name: Stop the DNS service
+      service:
+        name: bind9
+        state: stopped
