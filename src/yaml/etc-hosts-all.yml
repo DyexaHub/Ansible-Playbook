@@ -1,0 +1,18 @@
+---
+- name: Append entries to /etc/hosts on all Linux hosts
+  hosts: all_linux
+  become: true
+  tasks:
+    - name: Append host entries to /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        line: "{{ item }}"
+        state: present
+        create: yes
+        insertafter: EOF
+      loop:
+        - "192.168.40.1 jumphost"
+        - "192.168.40.2 serua"
+        - "192.168.40.3 sinabung"
+        - "192.168.40.4 rinjani"
+      when: item not in lookup('file', '/etc/hosts')
