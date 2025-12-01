@@ -353,5 +353,3 @@ src/templates/haproxy.cfg.j2
 This repository is built to be a **scalable**, **future-proof**, and **modular automation framework**. Whether you're deploying a small lab, managing multi-site enterprise infrastructure, or experimenting with hybrid Windows/Linux automation — this structure gives you the flexibility to grow without rewriting everything later.
 
 Automation evolves fast. This repo gives you the foundation to adapt, upgrade, and expand however your infrastructure demands.
-
-If you need enhancements like roles, CI/CD pipelines, monitoring integration, or full infra diagrams, feel free to ask — happy to help you level it up. 🚀
