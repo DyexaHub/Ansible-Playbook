@@ -1,0 +1,33 @@
+---
+- name: Install DNS service on all Linux hosts
+  hosts: all_linux
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade the system to ensure all dependencies are available
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+    - name: Install Bind9 DNS service
+      apt:
+        name: bind9
+        state: present
+        update_cache: yes
+
+    - name: Configure Bind9 to listen on specific IP addresses
+      lineinfile:
+        path: /etc/bind/named.conf.options
+        regexp: "^\\s*listen-on\\s+port\\s+53\\s+{"
+        line: "    listen-on port 53 { {{ ansible_default_ipv4.address }}; 127.0.0.1; };"
+        state: present
+      notify: Restart Bind9
+
+  handlers:
+    - name: Restart Bind9
+      service:
+        name: bind9
+        state: restarted
