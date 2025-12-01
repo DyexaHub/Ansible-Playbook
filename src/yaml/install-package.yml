@@ -1,0 +1,25 @@
+---
+- name: Install packages from packages.txt
+  hosts: all_linux
+  become: true
+  vars:
+    package_file: "/root/packages.txt"
+  tasks:
+    - name: Read package list from file
+      ansible.builtin.slurp:
+        src: "{{ package_file }}"
+      register: package_file_content
+
+    - name: Decode the package list file
+      set_fact:
+        decoded_packages: "{{ package_file_content['content'] | b64decode }}"
+
+    - name: Convert decoded content into a list of packages
+      set_fact:
+        packages_list: "{{ decoded_packages.splitlines() | select('length') | list }}"
+
+    - name: Install packages from packages.txt
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ packages_list }}"
