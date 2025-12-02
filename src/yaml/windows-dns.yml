@@ -17,7 +17,7 @@
         state: started
       when: dns_installed.changed
 
-    - name: Add DNS record awu.lks2024.id -> 10.17.8.45
+    - name: Add DNS record awu.lks2025.id -> 10.17.8.45
       ansible.windows.win_dns_record:
         zone: "lks2024.id"
         name: "awu"
@@ -27,7 +27,7 @@
       register: dns_record_added
 
     - name: Verify the DNS record creation
-      ansible.windows.win_shell: nslookup awu.lks2024.id
+      ansible.windows.win_shell: nslookup awu.lks2025.id
       register: nslookup_result
       changed_when: false
 
