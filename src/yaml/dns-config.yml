@@ -14,9 +14,9 @@
         path: /etc/bind/named.conf.local
         create: yes
         block: |
-          zone "lksn2024.id" {
+          zone "lksn2025.id" {
             type master;
-            file "/etc/bind/db.lksn2024.id";
+            file "/etc/bind/db.lksn2025.id";
           };
 
     - name: Create zone file for lksn2024.id
@@ -27,7 +27,7 @@
           ; BIND data file for lksn2024.id
           ;
           $TTL    604800
-          @       IN      SOA     ns.lksn2024.id. root.lksn2024.id. (
+          @       IN      SOA     ns.lksn2025.id. root.lksn2025.id. (
                               2023102401 ; Serial
                               604800     ; Refresh
                               86400      ; Retry
